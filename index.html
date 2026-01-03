@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Bite Omakase | NYC</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- GLOBAL VARIABLES --- */
+        :root {
+            --bg-dark: #111111;       /* Deep Charcoal/Black */
+            --bg-panel: #1A1A1A;      /* Slightly lighter for cards */
+            --text-main: #F4F4F4;     /* Off-white for readability */
+            --text-muted: #A0A0A0;    /* Grey for secondary text */
+            --accent-gold: #C5A065;   /* The "Wood/Gold" Premium Accent */
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .gold-text { color: var(--accent-gold); }
+        .text-center { text-align: center; }
+        
+        /* Button Styles */
+        .btn-gold {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--bg-dark);
+            padding: 14px 32px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid var(--accent-gold);
+            margin-top: 20px;
+        }
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--accent-gold);
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 10px 24px;
+            border: 1px solid var(--accent-gold);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+        .btn-outline:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-dark);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(17, 17, 17, 0.95);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(197, 160, 101, 0.2);
+        }
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--text-main);
+        }
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        .nav-links a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+        .nav-links a:hover { color: var(--accent-gold); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1925&auto=format&fit=crop'); /* Placeholder Sushi Image */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+        .hero-sub {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .price-tag {
+            display: block;
+            margin-top: 15px;
+            font-family: var(--font-heading);
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* --- PHILOSOPHY / CHEF SECTION --- */
+        .philosophy {
+            padding: 100px 0;
+            background-color: var(--bg-dark);
+        }
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .chef-img img {
+            width: 100%;
+            filter: grayscale(100%); /* Elegant B&W look */
+            border-radius: 2px;
+            transition: 0.5s;
+        }
+        .chef-img img:hover { filter: grayscale(0%); } /* Reveal color on hover */
+        
+        .bio-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-gold);
+        }
+        .bio-text p {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+        .pedigree {
+            border-left: 2px solid var(--accent-gold);
+            padding-left: 20px;
+            margin-top: 30px;
+            font-style: italic;
+            color: var(--text-main);
+        }
+
+        /* --- MENU SECTION --- */
+        .menu-section {
+            padding: 100px 0;
+            background-color: var(--bg-panel);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Subtle texture overlay */
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .menu-card {
+            border: 1px solid rgba(197, 160, 101, 0.3);
+            padding: 40px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .menu-card:hover {
+            border-color: var(--accent-gold);
+            background: rgba(255,255,255,0.02);
+        }
+        .menu-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+        .menu-price {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .course-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-muted);
+        }
+        .course-list li:last-child { border-bottom: none; }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #000;
+            padding: 80px 0 40px;
+            border-top: 1px solid #222;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        .footer-col h4 {
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        .footer-col p, .footer-col a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #222;
+            padding-top: 30px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .split-layout { grid-template-columns: 1fr; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Hide links for simplicity in this demo */
+            .logo { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-flex">
+            <div class="logo">ONE BITE OMAKASE</div>
+            <div class="nav-links">
+                <a href="#about">Our Story</a>
+                <a href="#menu">Menu</a>
+                <a href="#location">Location</a>
+                <a href="#" class="gold-text">Reserve</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>The Discipline of Masa.<br>The Soul of Shokunin.</h1>
+            <div class="hero-sub">Edo-Mae Tradition crafted by Chef Johnny & Chef Jason</div>
+            
+            <a href="#" class="btn-gold">Reserve Your Seat</a>
+            <span class="price-tag">Lunch $49 | Dinner $89</span>
+        </div>
+    </section>
+
+    <section id="about" class="philosophy">
+        <div class="container split-layout">
+            <div class="bio-text">
+                <h2>A Culinary Journey</h2>
+                <p>Omakase is not just a meal; it is a relationship of trust. Chef Johnny brings over two decades of culinary precision to Amsterdam Avenue.</p>
+                <p>From the high-pressure kitchens of <strong>Masa</strong> and <strong>Daniel</strong> to the delicate artistry of <strong>Patisserie FOUET</strong>, his journey has been one of relentless perfection. Joined by Chef Jason’s unwavering devotion to the craft, One Bite Omakase offers a dining experience that honors tradition while remaining warm and accessible.</p>
+                
+                <div class="pedigree">
+                    "Precision honed at Masa. French technique from Daniel. <br>A new standard for the Upper West Side."
+                </div>
+            </div>
+            <div class="chef-img">
+                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=2688&auto=format&fit=crop" alt="Chef Preparing Sushi">
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="gold-text">The Courses</h2>
+                <p style="color: var(--text-muted)">Seasonal ingredients, subject to change daily.</p>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="menu-title">Lunch Omakase</div>
+                    <span class="menu-price">$49</span>
+                    <ul class="course-list">
+                        <li>Seasonal Appetizer</li>
+                        <li><strong>8 Pieces</strong> Premium Nigiri</li>
+                        <li>Signature Handroll</li>
+                        <li>Miso Soup</li>
+                    </ul>
+                    <a href="#" class="btn-outline">Book Lunch</a>
+                </div>
+
+                <div class="menu-card">
+                    <div class="menu-title">Dinner Omakase</div>
+                    <span class="menu-price">$89</span>
+                    <ul class="course-list">
+                        <li><strong>Zensai</strong> (Seasonal Starter)</li>
+                        <li>Sashimi Selection</li>
+                        <li><strong>10 Pieces</strong> Premium Nigiri</li>
+                        <li>Signature Handroll</li>
+                        <li>Tamago & Dessert</li>
+                    </ul>
+                    <a href="#" class="btn-outline">Book Dinner</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="location">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h4>Visit Us</h4>
+                <p>411 B Amsterdam Avenue<br>New York, NY 10024</p>
+                <a href="https://goo.gl/maps/placeholder" target="_blank" style="text-decoration: underline;">Get Directions</a>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="mailto:info@onebiteomakase.com">info@onebiteomakase.com</a>
+                <a href="tel:2128841583">212-884-1583</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hours</h4>
+                <p><strong>Lunch:</strong> 12:00pm - 2:00pm</p>
+                <p><strong>Dinner:</strong> 5:00pm - 10:00pm</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 One Bite Omakase. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
