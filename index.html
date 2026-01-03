@@ -15,6 +15,7 @@
             --bg-cream: #FCF8ED;
             --text-black: #1a1a1a;
             --text-accent: #8B5A2B;
+            --text-white: #FCF8ED;
             --font-heading: 'Tenor Sans', sans-serif;
             --font-body: 'Libre Baskerville', serif;
             --wood-texture: url('https://static.wixstatic.com/media/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg/v1/fill/w_1797,h_154,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg');
@@ -56,18 +57,22 @@
             display: inline-block;
             background-color: var(--text-black);
             color: var(--bg-cream);
-            padding: 16px 42px;
+            padding: 14px 38px;
             font-family: var(--font-heading);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 2px;
             border: 1px solid var(--text-black);
-            margin-top: 25px;
+            margin-top: 20px;
             transition: all 0.4s ease;
         }
-        .btn-primary:hover {
-            background-color: transparent;
-            color: var(--text-black);
-            cursor: pointer;
+        .btn-primary.inverse {
+             background-color: transparent;
+             color: var(--text-white);
+             border-color: var(--text-white);
+        }
+        .btn-primary.inverse:hover {
+             background-color: var(--text-white);
+             color: var(--text-black);
         }
 
         /* --- NAVIGATION --- */
@@ -129,54 +134,69 @@
 
         /* --- HERO SECTION --- */
         .hero {
-            height: 90vh;
+            min-height: 95vh; 
             margin-top: 90px;
-            background: url('https://images.unsplash.com/photo-1552590635-27c2c2128abf?q=80&w=2670&auto=format&fit=crop');
+            
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0) 60%), 
+                        url('images/hero-banner.png');
             background-size: cover;
-            background-position: center;
+            /* Shifting background higher to 25% */
+            background-position: center 25%;
+            
             display: flex;
-            align-items: center;
+            align-items: flex-end;
             justify-content: center;
-        }
-        .hero-card {
-            background-color: var(--bg-cream);
-            padding: 60px 80px;
+            
+            padding-bottom: 60px;
             text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2); 
-            max-width: 650px;
-            border: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-white);
         }
-        .hero-card h1 {
-            font-size: 2.8rem;
-            line-height: 1.2;
-            margin-bottom: 15px;
+        
+        .hero-content-wrapper {
+            max-width: 800px;
+            padding: 0 20px;
         }
-        .hero-card .subtitle {
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 400;
+        }
+        
+        .hero .subtitle {
             font-family: var(--font-body);
-            font-size: 1.1rem;
+            font-size: 0.85rem;
             font-style: italic;
-            color: #555;
-            margin-bottom: 30px;
+            color: rgba(252, 248, 237, 0.85);
+            margin-bottom: 25px;
+            letter-spacing: 0.05em;
         }
+        
         .price-text {
             display: block;
-            margin-top: 20px;
+            margin-top: 25px;
             font-family: var(--font-heading);
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            color: rgba(252, 248, 237, 0.7);
+            text-transform: uppercase;
         }
 
         /* --- STORY SECTION --- */
         .story-section {
-            padding-top: 100px;
-            padding-bottom: 0; /* No bottom padding for seamless look */
+            padding: 100px 0;
             background-color: var(--bg-cream);
         }
         
         .concept-wrapper {
-            max-width: 1100px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
         .concept-block {
             max-width: 700px;
@@ -198,15 +218,15 @@
             font-style: italic;
         }
 
-        /* FULL WIDTH CHEF GRID */
+        /* FULL WIDTH CHEF GRID WRAPPER */
         .chef-full-width-wrapper {
             width: 100%;
         }
         
-        /* DESKTOP GRID (Default > 1500px) */
+        /* DESKTOP GRID (Panoramic 4-Column) */
         .chef-grid {
             display: grid;
-            grid-template-columns: 30% 20% 20% 30%; /* 4 Columns */
+            grid-template-columns: 30% 20% 20% 30%;
             width: 100%;
             align-items: stretch;
         }
@@ -274,7 +294,7 @@
             padding: 80px;
             border: 1px solid rgba(0,0,0,0.05);
             box-shadow: 0 10px 30px rgba(0,0,0,0.02);
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         .menu-grid {
@@ -341,44 +361,36 @@
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
 
-        /* LAPTOP / TABLET LANDSCAPE (1500px and below) */
-        /* Increased from 1280px to 1500px to cover MacBook Air & Pro 13/14" */
+        /* LAPTOP / TABLET (Under 1500px) */
         @media (max-width: 1500px) {
             .chef-grid { 
-                /* Switch to 2x2 Checkerboard */
                 grid-template-columns: 1fr 1fr; 
                 grid-auto-flow: row;
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 0 40px; 
+                gap: 60px;
             }
-            .chef-photo-side { 
-                min-height: 500px;
+            .chef-photo-side { min-height: 500px; }
+            .chef-photo-side img {
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             }
-            /* Grid Flow Logic for 2x2:
-               1. Image (Johnny)
-               2. Text (Johnny)
-               3. Text (Jason)
-               4. Image (Jason)
-               
-               This creates:
-               Row 1: Image | Text
-               Row 2: Text | Image
-               Perfect Checkerboard.
-            */
         }
 
         /* TABLET PORTRAIT / LARGE MOBILE (Under 900px) */
         @media (max-width: 900px) {
-            .hero-card { padding: 40px 30px; }
-            .hero-card h1 { font-size: 2.2rem; }
+            .hero-content-wrapper { padding: 0 30px; }
+            .hero h1 { font-size: 1.2rem; }
             
             .chef-grid {
-                grid-template-columns: 1fr; /* 1 Column Stack */
+                grid-template-columns: 1fr;
+                padding: 0 40px; 
+                gap: 0;
             }
-            
-            /* Reorder to maintain Image -> Text flow for both chefs */
-            .chef-grid > div:nth-child(1) { order: 1; } /* Johnny Img */
-            .chef-grid > div:nth-child(2) { order: 2; } /* Johnny Text */
-            .chef-grid > div:nth-child(4) { order: 3; } /* Jason Img (moved up) */
-            .chef-grid > div:nth-child(3) { order: 4; } /* Jason Text (moved down) */
+            .chef-grid > div:nth-child(1) { order: 1; }
+            .chef-grid > div:nth-child(2) { order: 2; }
+            .chef-grid > div:nth-child(4) { order: 3; }
+            .chef-grid > div:nth-child(3) { order: 4; }
             
             .chef-photo-side { min-height: 350px; }
             .chef-profile { padding: 50px 20px; }
@@ -386,9 +398,15 @@
 
         /* MOBILE (Under 600px) */
         @media (max-width: 600px) {
+            .hero h1 { font-size: 1.1rem; letter-spacing: 0.15em; }
+            .hero .subtitle { font-size: 0.8rem; }
+            
+            .container { padding: 0 20px; }
+            .chef-grid { padding: 0 20px; }
+            .menu-wrapper { padding: 30px 20px; }
+            
             .menu-grid { grid-template-columns: 1fr; gap: 40px; }
             .menu-divider { display: none; }
-            .menu-wrapper { padding: 30px 20px; }
             .nav-links { display: none; }
             
             .footer-flex { flex-direction: column; gap: 40px; text-align: center; }
@@ -410,16 +428,15 @@
     </nav>
 
     <section class="hero">
-        <div class="hero-card">
+        <div class="hero-content-wrapper">
             <h1>THE DISCIPLINE OF MASA.<br>THE SOUL OF SHOKUNIN.</h1>
             <div class="subtitle">Edo-Mae Tradition on Amsterdam Ave.</div>
-            <a href="#" class="btn-primary">RESERVE A SEAT</a>
+            <a href="#" class="btn-primary inverse">RESERVE A SEAT</a>
             <span class="price-text">Lunch $49 | Dinner $89</span>
         </div>
     </section>
 
     <section id="story" class="story-section">
-        
         <div class="concept-wrapper">
             <div class="concept-block">
                 <h3>THE "ONE BITE" PHILOSOPHY</h3>
@@ -429,7 +446,6 @@
 
         <div class="chef-full-width-wrapper">
             <div class="chef-grid">
-                
                 <div class="chef-photo-side">
                     <img src="https://static.wixstatic.com/media/adc632_da030dfacdb94bd585461da133c819cc~mv2.jpg/v1/fill/w_714,h_524,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/adc632_da030dfacdb94bd585461da133c819cc~mv2.jpg" alt="Chef at Counter">
                 </div>
@@ -460,7 +476,6 @@
                  <div class="chef-photo-side">
                     <img src="https://static.wixstatic.com/media/79fec4_b43aaa7752454523aebc078775f88cb6~mv2.jpg/v1/fill/w_712,h_524,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/79fec4_b43aaa7752454523aebc078775f88cb6~mv2.jpg" alt="Chef Torching">
                 </div>
-
             </div>
         </div>
     </section>
