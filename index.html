@@ -7,82 +7,67 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Tenor+Sans&display=swap" rel="stylesheet">
 
     <style>
         /* --- GLOBAL VARIABLES --- */
         :root {
-            --bg-dark: #111111;       /* Deep Charcoal/Black */
-            --bg-panel: #1A1A1A;      /* Slightly lighter for cards */
-            --text-main: #F4F4F4;     /* Off-white for readability */
-            --text-muted: #A0A0A0;    /* Grey for secondary text */
-            --accent-gold: #C5A065;   /* The "Wood/Gold" Premium Accent */
-            --font-heading: 'Cormorant Garamond', serif;
-            --font-body: 'Montserrat', sans-serif;
+            --bg-cream: #FCF8ED;
+            --text-black: #1a1a1a;
+            --text-accent: #8B5A2B;
+            --font-heading: 'Tenor Sans', sans-serif;
+            --font-body: 'Libre Baskerville', serif;
+            --wood-texture: url('https://static.wixstatic.com/media/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg/v1/fill/w_1797,h_154,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg');
         }
 
         /* --- RESET & BASE STYLES --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: var(--bg-cream);
+            color: var(--text-black);
             font-family: var(--font-body);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            line-height: 1.8;
+            font-size: 16px;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, h4 {
             font-family: var(--font-heading);
+            color: var(--text-black);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             font-weight: 400;
-            letter-spacing: 0.05em;
         }
 
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
 
-        /* --- UTILITIES --- */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 40px;
         }
 
-        .gold-text { color: var(--accent-gold); }
         .text-center { text-align: center; }
-        
-        /* Button Styles */
-        .btn-gold {
-            display: inline-block;
-            background-color: var(--accent-gold);
-            color: var(--bg-dark);
-            padding: 14px 32px;
-            font-family: var(--font-body);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border: 1px solid var(--accent-gold);
-            margin-top: 20px;
-        }
-        .btn-gold:hover {
-            background-color: transparent;
-            color: var(--accent-gold);
-            cursor: pointer;
-        }
 
-        .btn-outline {
+        /* Button */
+        .btn-primary {
             display: inline-block;
-            background-color: transparent;
-            color: var(--accent-gold);
-            padding: 10px 24px;
-            border: 1px solid var(--accent-gold);
+            background-color: var(--text-black);
+            color: var(--bg-cream);
+            padding: 16px 42px;
+            font-family: var(--font-heading);
             font-size: 0.9rem;
-            text-transform: uppercase;
-            margin-top: 20px;
+            letter-spacing: 2px;
+            border: 1px solid var(--text-black);
+            margin-top: 25px;
+            transition: all 0.4s ease;
         }
-        .btn-outline:hover {
-            background-color: var(--accent-gold);
-            color: var(--bg-dark);
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--text-black);
+            cursor: pointer;
         }
 
         /* --- NAVIGATION --- */
@@ -90,182 +75,323 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 0;
-            background: rgba(17, 17, 17, 0.95);
+            height: 90px;
+            background-color: var(--bg-cream);
             z-index: 1000;
-            border-bottom: 1px solid rgba(197, 160, 101, 0.2);
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-image: var(--wood-texture);
+            background-size: cover;
         }
         .nav-flex {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
         .logo {
             font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            color: var(--text-main);
+            font-size: 1.6rem;
+            letter-spacing: 0.15em;
+            color: var(--text-black);
         }
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
         }
         .nav-links a {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            color: var(--text-muted);
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--text-black);
+            position: relative;
         }
-        .nav-links a:hover { color: var(--accent-gold); }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--text-black);
+            transition: width 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
 
         /* --- HERO SECTION --- */
         .hero {
             height: 90vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1553621042-f6e147245754?q=80&w=1925&auto=format&fit=crop'); /* Placeholder Sushi Image */
+            margin-top: 90px;
+            background: url('https://images.unsplash.com/photo-1552590635-27c2c2128abf?q=80&w=2670&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+        .hero-card {
+            background-color: var(--bg-cream);
+            padding: 60px 80px;
             text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2); 
+            max-width: 650px;
+            border: 1px solid rgba(0,0,0,0.05);
         }
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            line-height: 1.1;
+        .hero-card h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 15px;
         }
-        .hero-sub {
+        .hero-card .subtitle {
             font-family: var(--font-body);
             font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-        .price-tag {
-            display: block;
-            margin-top: 15px;
-            font-family: var(--font-heading);
             font-style: italic;
-            font-size: 1.2rem;
-            color: var(--text-muted);
+            color: #555;
+            margin-bottom: 30px;
+        }
+        .price-text {
+            display: block;
+            margin-top: 20px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
         }
 
-        /* --- PHILOSOPHY / CHEF SECTION --- */
-        .philosophy {
-            padding: 100px 0;
-            background-color: var(--bg-dark);
+        /* --- STORY SECTION --- */
+        .story-section {
+            padding-top: 100px;
+            padding-bottom: 0; /* No bottom padding for seamless look */
+            background-color: var(--bg-cream);
         }
-        .split-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        .chef-img img {
-            width: 100%;
-            filter: grayscale(100%); /* Elegant B&W look */
-            border-radius: 2px;
-            transition: 0.5s;
-        }
-        .chef-img img:hover { filter: grayscale(0%); } /* Reveal color on hover */
         
-        .bio-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--accent-gold);
+        .concept-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        .bio-text p {
-            margin-bottom: 20px;
-            color: var(--text-muted);
-            font-weight: 300;
+        .concept-block {
+            max-width: 700px;
+            margin: 0 auto 100px auto;
+            text-align: center;
+            padding: 40px;
+            border: 1px solid #E0DCD0;
+            background-color: #FFF;
+            box-shadow: 10px 10px 0px rgba(0,0,0,0.03);
         }
-        .pedigree {
-            border-left: 2px solid var(--accent-gold);
-            padding-left: 20px;
-            margin-top: 30px;
+        .concept-block h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--text-black);
+        }
+        .concept-block p {
+            font-size: 1rem;
+            color: #444;
             font-style: italic;
-            color: var(--text-main);
+        }
+
+        /* FULL WIDTH CHEF GRID */
+        .chef-full-width-wrapper {
+            width: 100%;
+        }
+        
+        /* DESKTOP GRID (Default > 1500px) */
+        .chef-grid {
+            display: grid;
+            grid-template-columns: 30% 20% 20% 30%; /* 4 Columns */
+            width: 100%;
+            align-items: stretch;
+        }
+        
+        /* Photo Styling */
+        .chef-photo-side {
+            height: 100%;
+            min-height: 600px;
+        }
+        .chef-photo-side img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Bio Styling */
+        .chef-profile {
+            padding: 60px 40px; 
+            background-color: var(--bg-cream);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .chef-profile h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--text-accent);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .chef-profile p {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: #333;
+            text-align: left;
+            line-height: 1.7;
+        }
+        
+        .pedigree-list {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(139, 90, 43, 0.05);
+            border-left: 3px solid var(--text-accent);
+        }
+        .pedigree-list span {
+            display: block;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
         }
 
         /* --- MENU SECTION --- */
         .menu-section {
             padding: 100px 0;
-            background-color: var(--bg-panel);
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Subtle texture overlay */
+            background-color: #F7F3E8; 
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        .menu-wrapper {
+            background-color: var(--bg-cream);
+            padding: 80px;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .menu-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-top: 50px;
+            grid-template-columns: 1fr 1px 1fr;
+            gap: 60px;
         }
-        .menu-card {
-            border: 1px solid rgba(197, 160, 101, 0.3);
-            padding: 40px;
-            text-align: center;
-            transition: 0.3s;
+        .menu-divider { width: 1px; height: 100%; background: #DDD; }
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--text-black);
+            padding-bottom: 10px;
         }
-        .menu-card:hover {
-            border-color: var(--accent-gold);
-            background: rgba(255,255,255,0.02);
-        }
-        .menu-title {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
-        .menu-price {
-            font-size: 1.5rem;
-            color: var(--accent-gold);
-            font-weight: 600;
-            margin-bottom: 20px;
-            display: block;
-        }
-        .course-list li {
+        .course-name { font-family: var(--font-heading); font-size: 1.5rem; }
+        .course-price { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; }
+        .menu-items li {
             padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            color: var(--text-muted);
+            border-bottom: 1px dashed #E0DCD0;
+            display: flex;
+            justify-content: space-between;
         }
-        .course-list li:last-child { border-bottom: none; }
 
         /* --- FOOTER --- */
         footer {
-            background-color: #000;
+            background-color: #1a1a1a;
+            color: #FCF8ED;
             padding: 80px 0 40px;
-            border-top: 1px solid #222;
+            position: relative;
         }
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-image: var(--wood-texture);
+            background-size: cover;
+        }
+        .footer-flex {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 40px;
-            margin-bottom: 60px;
         }
         .footer-col h4 {
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
+            color: #FCF8ED;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            opacity: 0.6;
         }
         .footer-col p, .footer-col a {
-            color: var(--text-muted);
-            font-size: 0.9rem;
+            color: #FCF8ED;
+            opacity: 0.9;
             display: block;
             margin-bottom: 10px;
-        }
-        .copyright {
-            text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 30px;
-            font-size: 0.8rem;
-            color: #555;
+            font-family: var(--font-heading);
+            letter-spacing: 0.05em;
         }
 
-        /* --- MOBILE RESPONSIVE --- */
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .split-layout { grid-template-columns: 1fr; }
-            .menu-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; } /* Hide links for simplicity in this demo */
-            .logo { font-size: 1.2rem; }
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+
+        /* LAPTOP / TABLET LANDSCAPE (1500px and below) */
+        /* Increased from 1280px to 1500px to cover MacBook Air & Pro 13/14" */
+        @media (max-width: 1500px) {
+            .chef-grid { 
+                /* Switch to 2x2 Checkerboard */
+                grid-template-columns: 1fr 1fr; 
+                grid-auto-flow: row;
+            }
+            .chef-photo-side { 
+                min-height: 500px;
+            }
+            /* Grid Flow Logic for 2x2:
+               1. Image (Johnny)
+               2. Text (Johnny)
+               3. Text (Jason)
+               4. Image (Jason)
+               
+               This creates:
+               Row 1: Image | Text
+               Row 2: Text | Image
+               Perfect Checkerboard.
+            */
+        }
+
+        /* TABLET PORTRAIT / LARGE MOBILE (Under 900px) */
+        @media (max-width: 900px) {
+            .hero-card { padding: 40px 30px; }
+            .hero-card h1 { font-size: 2.2rem; }
+            
+            .chef-grid {
+                grid-template-columns: 1fr; /* 1 Column Stack */
+            }
+            
+            /* Reorder to maintain Image -> Text flow for both chefs */
+            .chef-grid > div:nth-child(1) { order: 1; } /* Johnny Img */
+            .chef-grid > div:nth-child(2) { order: 2; } /* Johnny Text */
+            .chef-grid > div:nth-child(4) { order: 3; } /* Jason Img (moved up) */
+            .chef-grid > div:nth-child(3) { order: 4; } /* Jason Text (moved down) */
+            
+            .chef-photo-side { min-height: 350px; }
+            .chef-profile { padding: 50px 20px; }
+        }
+
+        /* MOBILE (Under 600px) */
+        @media (max-width: 600px) {
+            .menu-grid { grid-template-columns: 1fr; gap: 40px; }
+            .menu-divider { display: none; }
+            .menu-wrapper { padding: 30px 20px; }
+            .nav-links { display: none; }
+            
+            .footer-flex { flex-direction: column; gap: 40px; text-align: center; }
         }
     </style>
 </head>
@@ -275,97 +401,123 @@
         <div class="container nav-flex">
             <div class="logo">ONE BITE OMAKASE</div>
             <div class="nav-links">
-                <a href="#about">Our Story</a>
-                <a href="#menu">Menu</a>
-                <a href="#location">Location</a>
-                <a href="#" class="gold-text">Reserve</a>
+                <a href="#story">OUR STORY</a>
+                <a href="#menu">MENU</a>
+                <a href="#visit">LOCATION</a>
+                <a href="#" style="font-weight: 600;">RESERVE</a>
             </div>
         </div>
     </nav>
 
     <section class="hero">
-        <div class="container hero-content">
-            <h1>The Discipline of Masa.<br>The Soul of Shokunin.</h1>
-            <div class="hero-sub">Edo-Mae Tradition crafted by Chef Johnny & Chef Jason</div>
-            
-            <a href="#" class="btn-gold">Reserve Your Seat</a>
-            <span class="price-tag">Lunch $49 | Dinner $89</span>
+        <div class="hero-card">
+            <h1>THE DISCIPLINE OF MASA.<br>THE SOUL OF SHOKUNIN.</h1>
+            <div class="subtitle">Edo-Mae Tradition on Amsterdam Ave.</div>
+            <a href="#" class="btn-primary">RESERVE A SEAT</a>
+            <span class="price-text">Lunch $49 | Dinner $89</span>
         </div>
     </section>
 
-    <section id="about" class="philosophy">
-        <div class="container split-layout">
-            <div class="bio-text">
-                <h2>A Culinary Journey</h2>
-                <p>Omakase is not just a meal; it is a relationship of trust. Chef Johnny brings over two decades of culinary precision to Amsterdam Avenue.</p>
-                <p>From the high-pressure kitchens of <strong>Masa</strong> and <strong>Daniel</strong> to the delicate artistry of <strong>Patisserie FOUET</strong>, his journey has been one of relentless perfection. Joined by Chef Jason’s unwavering devotion to the craft, One Bite Omakase offers a dining experience that honors tradition while remaining warm and accessible.</p>
-                
-                <div class="pedigree">
-                    "Precision honed at Masa. French technique from Daniel. <br>A new standard for the Upper West Side."
-                </div>
+    <section id="story" class="story-section">
+        
+        <div class="concept-wrapper">
+            <div class="concept-block">
+                <h3>THE "ONE BITE" PHILOSOPHY</h3>
+                <p>The One Bite Omakase concept revolves around a dining experience where each meticulously crafted piece is designed to be enjoyed in a single, unforgettable bite. We focus on presenting a sequence of expertly prepared courses, each showcasing unique flavors and textures, curated by our skilled chefs.</p>
             </div>
-            <div class="chef-img">
-                <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?q=80&w=2688&auto=format&fit=crop" alt="Chef Preparing Sushi">
+        </div>
+
+        <div class="chef-full-width-wrapper">
+            <div class="chef-grid">
+                
+                <div class="chef-photo-side">
+                    <img src="https://static.wixstatic.com/media/adc632_da030dfacdb94bd585461da133c819cc~mv2.jpg/v1/fill/w_714,h_524,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/adc632_da030dfacdb94bd585461da133c819cc~mv2.jpg" alt="Chef at Counter">
+                </div>
+
+                <div class="chef-profile">
+                    <h2>Chef Johnny</h2>
+                    <p>Chef Johnny, a seasoned culinary professional, hails from Indonesia, where he was immersed in the culinary world from an early age through his mother's influence.</p>
+                    <p>With over two decades of experience in the industry, he has honed his expertise, specializing in sushi for 15 years. He further expanded his repertoire by mastering desserts under the guidance of Chef Yoshie at Patisserie FOUET.</p>
+                    <p>In 2009, Chef MASA personally entrusted him to assist in the opening of Bar MASA in Las Vegas, where he also mentored local recruits.</p>
+                    
+                    <div class="pedigree-list">
+                        <span>ESTEEMED CONTRIBUTIONS:</span>
+                        Masa • Bar Masa • Hirohisa • Daniel
+                    </div>
+                </div>
+
+                <div class="chef-profile">
+                    <h2>Chef Jason</h2>
+                    <p>Chef Jason has immersed himself in the sushi industry since 2010, fueled by a deep passion for Japanese cuisine and Omakase.</p>
+                    <p>His enthusiasm for the culinary arts has remained unwavering over the years, bringing a dedicated energy to the counter every night.</p>
+                    
+                    <div class="pedigree-list">
+                        <span>RENOWNED ESTABLISHMENTS:</span>
+                        Blue Ribbon • Bonito • Shinzo
+                    </div>
+                </div>
+
+                 <div class="chef-photo-side">
+                    <img src="https://static.wixstatic.com/media/79fec4_b43aaa7752454523aebc078775f88cb6~mv2.jpg/v1/fill/w_712,h_524,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/79fec4_b43aaa7752454523aebc078775f88cb6~mv2.jpg" alt="Chef Torching">
+                </div>
+
             </div>
         </div>
     </section>
 
     <section id="menu" class="menu-section">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="gold-text">The Courses</h2>
-                <p style="color: var(--text-muted)">Seasonal ingredients, subject to change daily.</p>
-            </div>
-
+        <div class="menu-wrapper">
             <div class="menu-grid">
-                <div class="menu-card">
-                    <div class="menu-title">Lunch Omakase</div>
-                    <span class="menu-price">$49</span>
-                    <ul class="course-list">
+                <div class="menu-col">
+                    <div class="course-header">
+                        <span class="course-name">LUNCH</span>
+                        <span class="course-price">$49</span>
+                    </div>
+                    <ul class="menu-items">
                         <li>Seasonal Appetizer</li>
                         <li><strong>8 Pieces</strong> Premium Nigiri</li>
                         <li>Signature Handroll</li>
                         <li>Miso Soup</li>
                     </ul>
-                    <a href="#" class="btn-outline">Book Lunch</a>
                 </div>
-
-                <div class="menu-card">
-                    <div class="menu-title">Dinner Omakase</div>
-                    <span class="menu-price">$89</span>
-                    <ul class="course-list">
+                <div class="menu-divider"></div>
+                <div class="menu-col">
+                    <div class="course-header">
+                        <span class="course-name">DINNER</span>
+                        <span class="course-price">$89</span>
+                    </div>
+                    <ul class="menu-items">
                         <li><strong>Zensai</strong> (Seasonal Starter)</li>
                         <li>Sashimi Selection</li>
                         <li><strong>10 Pieces</strong> Premium Nigiri</li>
                         <li>Signature Handroll</li>
-                        <li>Tamago & Dessert</li>
+                        <li>Tamago & House Dessert</li>
                     </ul>
-                    <a href="#" class="btn-outline">Book Dinner</a>
                 </div>
+            </div>
+            <div class="text-center">
+                <a href="#" class="btn-primary" style="background: transparent; color: #000; margin-top: 50px;">VIEW FULL AVAILABILITY</a>
             </div>
         </div>
     </section>
 
-    <footer id="location">
-        <div class="container footer-grid">
+    <footer id="visit">
+        <div class="container footer-flex">
             <div class="footer-col">
-                <h4>Visit Us</h4>
+                <h4>VISIT US</h4>
                 <p>411 B Amsterdam Avenue<br>New York, NY 10024</p>
-                <a href="https://goo.gl/maps/placeholder" target="_blank" style="text-decoration: underline;">Get Directions</a>
+                <a href="#" style="text-decoration: underline; font-size: 0.8rem;">GET DIRECTIONS</a>
             </div>
             <div class="footer-col">
-                <h4>Contact</h4>
+                <h4>CONTACT</h4>
                 <a href="mailto:info@onebiteomakase.com">info@onebiteomakase.com</a>
                 <a href="tel:2128841583">212-884-1583</a>
             </div>
             <div class="footer-col">
-                <h4>Hours</h4>
-                <p><strong>Lunch:</strong> 12:00pm - 2:00pm</p>
-                <p><strong>Dinner:</strong> 5:00pm - 10:00pm</p>
+                <h4>HOURS</h4>
+                <p>Lunch: 12pm - 2pm</p>
+                <p>Dinner: 5pm - 10pm</p>
             </div>
-        </div>
-        <div class="copyright">
-            &copy; 2026 One Bite Omakase. All Rights Reserved.
         </div>
     </footer>
 
