@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Bite Omakase | NYC</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- GLOBAL VARIABLES --- */
+        :root {
+            --bg-white: #FFFFFF;
+            --bg-offset: #F4F4F4;     /* Crisp Light Gray for Section Contrast */
+            --text-black: #000000;    /* Jet Black for Maximum Contrast */
+            --text-dark: #333333;     /* Dark Grey for body text */
+            --border-color: #000000;  /* Solid Black Borders */
+            
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Lato', sans-serif;
+            
+            /* YOUR WOOD TEXTURE (Used only for borders now) */
+            --wood-texture: url('https://static.wixstatic.com/media/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg/v1/fill/w_1797,h_154,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg');
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-white);
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            color: var(--text-black);
+            font-weight: 600;
+            letter-spacing: -0.02em; /* Tighter tracking for elegance */
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .text-center { text-align: center; }
+
+        /* Button: High Contrast Solid Black */
+        .btn-black {
+            display: inline-block;
+            background-color: var(--text-black);
+            color: #FFF;
+            padding: 15px 40px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            border: 2px solid var(--text-black);
+            margin-top: 20px;
+        }
+        .btn-black:hover {
+            background-color: #FFF;
+            color: var(--text-black);
+            cursor: pointer;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 90px;
+            background-color: #FFF; /* Clean White */
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #EEE; /* Very subtle separation */
+        }
+        /* The Wood Accent Line at the top of the Nav */
+        nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px; /* Subtle 6px strip of wood */
+            background-image: var(--wood-texture);
+            background-size: cover;
+        }
+
+        .nav-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-black);
+            letter-spacing: 0.05em;
+        }
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+        .nav-links a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-black); /* Sharp Black Text */
+            letter-spacing: 1px;
+        }
+        .nav-links a:hover { text-decoration: underline; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 85vh;
+            margin-top: 90px;
+            /* Placeholder: Bright, high-key image */
+            background: url('https://images.unsplash.com/photo-1579584425555-c3ce17fd43fb?q=80&w=2672&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* High Contrast Box for Hero Text */
+        .hero-card {
+            background-color: #FFF;
+            padding: 50px 70px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 4px solid #000; /* Minimalist accent */
+            max-width: 600px;
+        }
+        .hero-card h1 {
+            font-size: 3.2rem;
+            line-height: 1.1;
+            margin-bottom: 10px;
+        }
+        .hero-card .subtitle {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 25px;
+            font-style: italic;
+            font-family: var(--font-heading);
+        }
+        .pricing-display {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-black);
+            margin-top: 15px;
+            display: block;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- STORY SECTION (White Background) --- */
+        .story-section {
+            padding: 100px 0;
+            background-color: var(--bg-white);
+        }
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .story-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        .story-text p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: #222; /* Very dark grey for readability */
+        }
+        /* Wood accent on the image only */
+        .story-img-wrapper {
+            position: relative;
+            padding: 10px;
+            border: 1px solid #EEE;
+        }
+        .story-img-wrapper img {
+            width: 100%;
+            display: block;
+        }
+        /* Wood border bottom of image */
+        .story-img-wrapper::after {
+            content: '';
+            display: block;
+            height: 8px;
+            width: 100%;
+            background-image: var(--wood-texture);
+            background-size: cover;
+        }
+
+        /* --- MENU SECTION (Light Gray for Contrast) --- */
+        .menu-section {
+            padding: 100px 0;
+            background-color: var(--bg-offset); /* Gray background to separate sections */
+            border-top: 1px solid #DDD;
+            border-bottom: 1px solid #DDD;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .section-header h2 { font-size: 2.8rem; }
+        
+        .menu-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0; /* Removing gap to make them touch like a physical menu */
+            border: 2px solid var(--text-black); /* Solid black border around whole menu */
+            background: #FFF;
+        }
+        
+        .menu-col {
+            padding: 60px 40px;
+            text-align: center;
+        }
+        /* Vertical divider between lunch and dinner */
+        .menu-col:first-child {
+            border-right: 1px dashed #999;
+        }
+
+        .course-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+        .price-large {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        .menu-items li {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            color: #444;
+        }
+        .menu-items li strong { color: #000; }
+
+        /* --- FOOTER (Black with Wood Top) --- */
+        footer {
+            background-color: #111;
+            color: #FFF;
+            padding: 80px 0 40px;
+            position: relative;
+        }
+        /* Wood Border Top of Footer */
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background-image: var(--wood-texture);
+            background-size: cover;
+        }
+        .footer-flex {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        .footer-col h4 {
+            color: #FFF;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+        .footer-col p, .footer-col a {
+            color: #BBB;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .footer-col a:hover { color: #FFF; }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .hero-card h1 { font-size: 2.5rem; }
+            .story-grid, .menu-container { grid-template-columns: 1fr; }
+            .menu-col:first-child { border-right: none; border-bottom: 1px dashed #999; }
+            .nav-links { display: none; }
+            .hero-card { margin: 0 15px; padding: 40px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-flex">
+            <div class="logo">ONE BITE OMAKASE</div>
+            <div class="nav-links">
+                <a href="#story">The Chef</a>
+                <a href="#menu">Menu</a>
+                <a href="#visit">Location</a>
+                <a href="#" style="border-bottom: 2px solid #000;">Reserve Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-card">
+            <h1>Edo-Mae Tradition.<br>New York Soul.</h1>
+            <div class="subtitle">Crafted by alumni of Masa, Daniel, and Blue Ribbon.</div>
+            
+            <a href="#" class="btn-black">Reserve Table</a>
+            <span class="pricing-display">Lunch $49 | Dinner $89</span>
+        </div>
+    </section>
+
+    <section id="story" class="story-section">
+        <div class="container story-grid">
+            <div class="story-text">
+                <h2>The Pursuit of Perfection</h2>
+                <p><strong>Chef Johnny</strong> brings over two decades of culinary precision to the counter. From the demanding kitchens of <strong>Masa</strong> and <strong>Daniel</strong> to the delicate artistry of <strong>Patisserie FOUET</strong>, his journey is defined by a refusal to compromise.</p>
+                <p>Joined by <strong>Chef Jason</strong> (Blue Ribbon, Shinzo), One Bite Omakase creates an environment where high-end sushi is stripped of pretension, leaving only the purity of the ingredients and the warmth of the hospitality.</p>
+            </div>
+            <div class="story-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1621857053538-46cb512ce2e6?q=80&w=2670&auto=format&fit=crop" alt="Chef at work">
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Omakase</h2>
+                <p style="color: #666; font-style: italic;">We serve two dedicated courses daily.</p>
+            </div>
+
+            <div class="menu-container">
+                <div class="menu-col">
+                    <div class="course-title">Lunch Course</div>
+                    <span class="price-large">$49</span>
+                    <ul class="menu-items">
+                        <li>Seasonal Appetizer</li>
+                        <li><strong>8 Pieces</strong> Chef's Selection Nigiri</li>
+                        <li>Signature Handroll</li>
+                        <li>Miso Soup</li>
+                    </ul>
+                </div>
+                <div class="menu-col">
+                    <div class="course-title">Dinner Course</div>
+                    <span class="price-large">$89</span>
+                    <ul class="menu-items">
+                        <li><strong>Zensai</strong> (Seasonal Starter)</li>
+                        <li>Sashimi Selection</li>
+                        <li><strong>10 Pieces</strong> Premium Nigiri</li>
+                        <li>Signature Handroll</li>
+                        <li>Tamago & House Dessert</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="#" class="btn-black">View Full Availability</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="visit">
+        <div class="container footer-flex">
+            <div class="footer-col">
+                <h4>Address</h4>
+                <p>411 B Amsterdam Avenue<br>New York, NY 10024</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="mailto:info@onebiteomakase.com">info@onebiteomakase.com</a>
+                <a href="tel:2128841583">212-884-1583</a>
+            </div>
+            <div class="footer-col">
+                <h4>Hours</h4>
+                <p>Lunch: 12pm - 2pm</p>
+                <p>Dinner: 5pm - 10pm</p>
+            </div>
+            <div class="footer-col">
+                <h4>Social</h4>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
