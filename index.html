@@ -293,6 +293,7 @@
         .chef-section {
             width: 100%;
             background-color: var(--bg-cream);
+            padding-bottom: 100px; /* Standard spacing for desktop */
         }
         
         .chef-grid {
@@ -364,7 +365,6 @@
         .gallery-track {
             display: flex;
             width: max-content;
-            /* No CSS animation, controlled by JS */
             will-change: transform;
         }
 
@@ -502,6 +502,11 @@
             .chef-grid > div:nth-child(2) { order: 2; }
             .chef-grid > div:nth-child(4) { order: 3; }
             .chef-grid > div:nth-child(3) { order: 4; }
+            
+            /* Target only the last item (Jason's text) on mobile to remove bottom padding */
+            .chef-grid > div:nth-child(3) {
+                padding-bottom: 0;
+            }
             
             .chef-photo-side { min-height: 350px; }
             .chef-profile { padding: 50px 20px; }
