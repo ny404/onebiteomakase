@@ -735,13 +735,13 @@
             });
 
             // B. Select TEXT elements (appear delayed)
-            // Exclude Footer from animation to prevent layout jump at bottom
+            // Exclude Footer AND Hero from animation so they are visible on load
             const revealText = document.querySelectorAll(
                 'h1, h2, h3, h4, p, .pedigree-list, .menu-items, .btn-primary, .price-text'
             );
             
             revealText.forEach(el => {
-                if (!el.closest('footer')) { 
+                if (!el.closest('footer') && !el.closest('.hero')) { 
                     el.classList.add('reveal', 'reveal-delay'); // Add delay class
                     observer.observe(el);
                 }
