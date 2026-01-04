@@ -225,8 +225,7 @@
         /* --- HARMONY (WA) SECTION --- */
         .harmony-wrapper {
             max-width: 1400px;
-            /* Removed bottom margin to prevent double spacing with section padding */
-            margin: 0 auto; 
+            margin: 0 auto;
             padding: 0 40px;
         }
         .harmony-grid {
@@ -290,14 +289,12 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        /* --- CHEF SECTION (STANDALONE) --- */
+        /* --- CHEF SECTION --- */
         .chef-section {
-            /* Full width by default, no internal padding needed unless desired */
             width: 100%;
             background-color: var(--bg-cream);
         }
         
-        /* DESKTOP GRID */
         .chef-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -305,7 +302,6 @@
             align-items: stretch;
         }
         
-        /* Photo Styling */
         .chef-photo-side {
             height: 100%;
             min-height: 600px;
@@ -317,7 +313,6 @@
             object-fit: cover;
         }
 
-        /* Bio Styling */
         .chef-profile {
             padding: 60px 40px; 
             background-color: var(--bg-cream);
@@ -354,6 +349,43 @@
             font-weight: 600;
             font-size: 0.8rem;
             margin-bottom: 5px;
+        }
+
+        /* --- GALLERY STRIP SECTION --- */
+        .gallery-strip {
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--text-black);
+            padding: 0;
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .gallery-track {
+            display: flex;
+            width: max-content;
+            /* No CSS animation, controlled by JS */
+            will-change: transform;
+        }
+
+        .gallery-item {
+            width: 400px;
+            height: 300px;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0.85;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item img:hover {
+            opacity: 1;
         }
 
         /* --- MENU SECTION --- */
@@ -473,6 +505,9 @@
             
             .chef-photo-side { min-height: 350px; }
             .chef-profile { padding: 50px 20px; }
+            
+            /* Adjust Image Strip height for mobile */
+            .gallery-item { height: 250px; width: 300px; }
         }
 
         /* MOBILE (Under 600px) */
@@ -576,6 +611,22 @@
         </div>
     </section>
 
+    <section class="gallery-strip">
+        <div class="gallery-track">
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_216eb73981dd42af86f7c8e3fda8a471~mv2.jpg" alt="Omakase Detail 1"></div>
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_d81162e5a72d44438b174719cf243520~mv2.jpg" alt="Omakase Detail 2"></div>
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_0e2c4d5d572542e2aa5507bfa25e2f91~mv2.jpg" alt="Omakase Detail 3"></div>
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_75db6c9435d042f4960d1c4e0c976b47~mv2.jpg" alt="Omakase Detail 4"></div>
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_43d05d756f7e44c681a78ac6bb223935~mv2.jpg" alt="Omakase Detail 5"></div>
+            
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_216eb73981dd42af86f7c8e3fda8a471~mv2.jpg" alt="Omakase Detail 1"></div>
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_d81162e5a72d44438b174719cf243520~mv2.jpg" alt="Omakase Detail 2"></div>
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_0e2c4d5d572542e2aa5507bfa25e2f91~mv2.jpg" alt="Omakase Detail 3"></div>
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_75db6c9435d042f4960d1c4e0c976b47~mv2.jpg" alt="Omakase Detail 4"></div>
+            <div class="gallery-item"><img src="https://static.wixstatic.com/media/79fec4_43d05d756f7e44c681a78ac6bb223935~mv2.jpg" alt="Omakase Detail 5"></div>
+        </div>
+    </section>
+
     <section id="menu" class="menu-section">
         <div class="menu-wrapper">
             <div class="menu-grid">
@@ -630,6 +681,55 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        window.addEventListener('load', () => {
+            const track = document.querySelector('.gallery-track');
+            const galleryItem = document.querySelector('.gallery-item');
+            
+            // Total number of ORIGINAL images (before duplication)
+            const itemCount = 5; 
+            
+            // Calculate width of one full set of images (400px * 5 = 2000px)
+            const itemWidth = 400; 
+            const singleSetWidth = itemWidth * itemCount;
+
+            let currentTrackPos = 0;
+            let lastScrollY = window.scrollY;
+            const speedFactor = 0.8; // Adjust speed sensitivity here
+
+            function updateGallery() {
+                const currentScrollY = window.scrollY;
+                const delta = currentScrollY - lastScrollY;
+
+                // Move track based on scroll delta
+                // Scrolling DOWN (positive delta) -> Move LEFT (negative translateX)
+                // Scrolling UP (negative delta) -> Move RIGHT (positive translateX)
+                currentTrackPos -= delta * speedFactor;
+
+                // Infinite Loop Logic:
+                // If we've scrolled past the first set (too far left), jump back to start
+                if (currentTrackPos <= -singleSetWidth) {
+                    currentTrackPos += singleSetWidth;
+                } 
+                // If we've scrolled past the start (too far right), jump to end of duplicate set
+                else if (currentTrackPos > 0) {
+                    currentTrackPos -= singleSetWidth;
+                }
+
+                // Apply transform
+                track.style.transform = `translateX(${currentTrackPos}px)`;
+
+                // Update last scroll position for next frame
+                lastScrollY = currentScrollY;
+
+                requestAnimationFrame(updateGallery);
+            }
+
+            // Start the loop
+            requestAnimationFrame(updateGallery);
+        });
+    </script>
 
 </body>
 </html>
