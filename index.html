@@ -18,7 +18,7 @@
             --text-white: #FCF8ED;
             --font-heading: 'Tenor Sans', sans-serif;
             --font-body: 'Libre Baskerville', serif;
-            --wood-texture: url('https://static.wixstatic.com/media/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg/v1/fill/w_1797,h_154,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg');
+            --wood-texture: url('https://static.wixstatic.com/media/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg/v1/fill/w_2034,h_308,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/adc632_c1d24f768b5344aaac03402c52c8b9aa~mv2.jpg');
         }
 
         /* --- RESET & BASE STYLES --- */
@@ -356,10 +356,15 @@
         .gallery-strip {
             width: 100%;
             overflow: hidden;
-            background-color: var(--text-black);
-            padding: 0;
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
+            background-image: var(--wood-texture);
+            background-size: cover;
+            background-position: center;
+            
+            /* Tighter padding per request */
+            padding: 8px 0; 
+            
+            /* Restored top border */
+            border-top: 1px solid rgba(0,0,0,0.05);
         }
 
         .gallery-track {
@@ -373,6 +378,8 @@
             height: 300px;
             flex-shrink: 0;
             position: relative;
+            /* Tighter margin per request */
+            margin-right: 8px; 
         }
 
         .gallery-item img {
@@ -380,8 +387,9 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            opacity: 0.85;
+            opacity: 0.9;
             transition: opacity 0.3s;
+            border: 1px solid rgba(255,255,255,0.2); 
         }
         
         .gallery-item img:hover {
@@ -697,7 +705,9 @@
             
             // Calculate width of one full set of images (400px * 5 = 2000px)
             const itemWidth = 400; 
-            const singleSetWidth = itemWidth * itemCount;
+            // NOTE: Updated to include margin gap in calculation so loop is smooth
+            const itemGap = 8; 
+            const singleSetWidth = (itemWidth + itemGap) * itemCount;
 
             let currentTrackPos = 0;
             let lastScrollY = window.scrollY;
