@@ -80,6 +80,25 @@
              color: var(--text-black);
         }
 
+        /* --- ANIMATION CLASSES --- */
+        /* Base Reveal State */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth easing */
+        }
+        
+        /* Active State (Visible) */
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay class for Text elements so Images appear first */
+        .reveal-delay {
+            transition-delay: 0.3s;
+        }
+
         /* --- NAVIGATION --- */
         nav {
             position: fixed;
@@ -359,11 +378,7 @@
             background-image: var(--wood-texture);
             background-size: cover;
             background-position: center;
-            
-            /* Tighter padding per request */
             padding: 8px 0; 
-            
-            /* Restored top border */
             border-top: 1px solid rgba(0,0,0,0.05);
         }
 
@@ -378,7 +393,6 @@
             height: 300px;
             flex-shrink: 0;
             position: relative;
-            /* Tighter margin per request */
             margin-right: 8px; 
         }
 
@@ -696,52 +710,80 @@
     </footer>
 
     <script>
-        window.addEventListener('load', () => {
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- 1. SCROLL REVEAL ANIMATION (Images First, Text Delayed) ---
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -30px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, observerOptions);
+
+            // A. Select IMAGES to animate (appear first)
+            const revealImages = document.querySelectorAll('.harmony-image img, .chef-photo-side img');
+            revealImages.forEach(el => {
+                el.classList.add('reveal');
+                observer.observe(el);
+            });
+
+            // B. Select TEXT elements (appear delayed)
+            // Exclude Footer from animation to prevent layout jump at bottom
+            const revealText = document.querySelectorAll(
+                'h1, h2, h3, h4, p, .pedigree-list, .menu-items, .btn-primary, .price-text'
+            );
+            
+            revealText.forEach(el => {
+                if (!el.closest('footer')) { 
+                    el.classList.add('reveal', 'reveal-delay'); // Add delay class
+                    observer.observe(el);
+                }
+            });
+
+
+            // --- 2. GALLERY STRIP SCROLL LOGIC ---
             const track = document.querySelector('.gallery-track');
-            const galleryItem = document.querySelector('.gallery-item');
             
             // Total number of ORIGINAL images (before duplication)
             const itemCount = 5; 
             
-            // Calculate width of one full set of images (400px * 5 = 2000px)
+            // Calculate width of one full set
             const itemWidth = 400; 
-            // NOTE: Updated to include margin gap in calculation so loop is smooth
-            const itemGap = 8; 
+            const itemGap = 8; // Match CSS margin-right
             const singleSetWidth = (itemWidth + itemGap) * itemCount;
 
             let currentTrackPos = 0;
             let lastScrollY = window.scrollY;
-            const speedFactor = 0.8; // Adjust speed sensitivity here
+            const speedFactor = 0.8; 
 
             function updateGallery() {
                 const currentScrollY = window.scrollY;
                 const delta = currentScrollY - lastScrollY;
 
-                // Move track based on scroll delta
-                // Scrolling DOWN (positive delta) -> Move LEFT (negative translateX)
-                // Scrolling UP (negative delta) -> Move RIGHT (positive translateX)
+                // Move based on scroll delta
                 currentTrackPos -= delta * speedFactor;
 
-                // Infinite Loop Logic:
-                // If we've scrolled past the first set (too far left), jump back to start
+                // Infinite Loop Logic
                 if (currentTrackPos <= -singleSetWidth) {
                     currentTrackPos += singleSetWidth;
                 } 
-                // If we've scrolled past the start (too far right), jump to end of duplicate set
                 else if (currentTrackPos > 0) {
                     currentTrackPos -= singleSetWidth;
                 }
 
-                // Apply transform
                 track.style.transform = `translateX(${currentTrackPos}px)`;
-
-                // Update last scroll position for next frame
                 lastScrollY = currentScrollY;
 
                 requestAnimationFrame(updateGallery);
             }
 
-            // Start the loop
             requestAnimationFrame(updateGallery);
         });
     </script>
