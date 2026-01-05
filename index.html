@@ -131,8 +131,7 @@
         }
         .nav-links {
             display: flex;
-            /* Reduced gap slightly to accommodate new links */
-            gap: 30px; 
+            gap: 30px;
         }
         .nav-links a {
             font-family: var(--font-heading);
@@ -310,7 +309,7 @@
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.9; transition: opacity 0.3s; border: 1px solid rgba(255,255,255,0.2); }
         .gallery-item img:hover { opacity: 1; }
 
-        /* --- MENU SECTION (Tatami Style) --- */
+        /* --- MENU SECTION (Tatami Style - STACKED LAYOUT) --- */
         .menu-section {
             padding: 100px 0;
             background-color: #F4EBD9;
@@ -325,8 +324,24 @@
             background-color: var(--bg-cream); padding: 80px; border: 1px solid rgba(0,0,0,0.05);
             box-shadow: 0 15px 40px rgba(0,0,0,0.08); max-width: 1400px; margin: 0 auto;
         }
-        .menu-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 60px; }
+        
+        /* 2-Column Layout: Left (Stacked Lunches) | Right (Dinner) */
+        .menu-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1px 1fr; 
+            gap: 60px; 
+        }
+        
         .menu-divider { width: 1px; height: 100%; background: #DDD; }
+        
+        /* Individual Course Blocks */
+        .menu-course-block {
+            margin-bottom: 60px; /* Spacing between stacked items */
+        }
+        .menu-course-block:last-child {
+            margin-bottom: 0;
+        }
+
         .course-header {
             display: flex; justify-content: space-between; align-items: baseline;
             margin-bottom: 30px; border-bottom: 2px solid var(--text-black); padding-bottom: 10px;
@@ -381,14 +396,14 @@
             text-decoration: none;
         }
         .news-item:hover {
-            padding-left: 10px; /* Subtle movement on hover */
-            background-color: rgba(252, 248, 237, 0.3); /* Slight cream tint */
+            padding-left: 10px; 
+            background-color: rgba(252, 248, 237, 0.3); 
         }
         .news-date {
             font-family: var(--font-body);
             font-size: 0.9rem;
             color: var(--text-accent);
-            width: 150px; /* Fixed width for alignment */
+            width: 150px; 
             flex-shrink: 0;
             font-style: italic;
         }
@@ -396,7 +411,7 @@
             font-family: var(--font-heading);
             font-weight: 600;
             font-size: 0.85rem;
-            width: 300px; /* Increased width */
+            width: 300px;
             flex-shrink: 0;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -444,11 +459,13 @@
             .chef-profile { padding: 50px 20px; }
             .gallery-item { height: 250px; width: 300px; }
             .reviews-grid { grid-template-columns: 1fr; gap: 30px; }
-            
-            /* News List Responsiveness */
             .news-item { flex-direction: column; align-items: flex-start; gap: 10px; }
             .news-date, .news-source { width: auto; font-size: 0.8rem; margin-bottom: 0; }
             .news-headline { font-size: 1rem; }
+            
+            /* Menu Responsive: Stack columns */
+            .menu-grid { grid-template-columns: 1fr; gap: 40px; }
+            .menu-divider { display: none; }
         }
         @media (max-width: 600px) {
             .hero h1 { font-size: 1.1rem; letter-spacing: 0.15em; }
@@ -457,8 +474,6 @@
             .harmony-wrapper { padding: 0 20px; }
             .chef-grid { padding: 0 20px; }
             .menu-wrapper { padding: 30px 20px; }
-            .menu-grid { grid-template-columns: 1fr; gap: 40px; }
-            .menu-divider { display: none; }
             .nav-links { display: none; }
             .hamburger { display: block; }
             .footer-flex { flex-direction: column; gap: 40px; text-align: center; }
@@ -577,33 +592,57 @@
 
     <section id="menu" class="menu-section">
         <div class="menu-wrapper">
+            
             <div class="menu-grid">
+                
                 <div class="menu-col">
-                    <div class="course-header">
-                        <span class="course-name">LUNCH</span>
-                        <span class="course-price">$49</span>
+                    
+                    <div class="menu-course-block">
+                        <div class="course-header">
+                            <span class="course-name">LUNCH CLASSIC</span>
+                            <span class="course-price">$49</span>
+                        </div>
+                        <ul class="menu-items">
+                            <li>Seasonal Appetizer</li>
+                            <li><strong>7 Pieces</strong> Premium Nigiri</li>
+                            <li>Signature Handroll</li>
+                        </ul>
                     </div>
-                    <ul class="menu-items">
-                        <li>Seasonal Appetizer</li>
-                        <li><strong>8 Pieces</strong> Premium Nigiri</li>
-                        <li>Signature Handroll</li>
-                    </ul>
+
+                    <div class="menu-course-block">
+                        <div class="course-header">
+                            <span class="course-name">LUNCH DELUXE</span>
+                            <span class="course-price">$59</span>
+                        </div>
+                        <ul class="menu-items">
+                            <li>Seasonal Appetizer</li>
+                            <li><strong>8 Pieces</strong> Premium Nigiri</li>
+                            <li>Signature Handroll</li>
+                        </ul>
+                    </div>
+
                 </div>
+                
                 <div class="menu-divider"></div>
+
                 <div class="menu-col">
-                    <div class="course-header">
-                        <span class="course-name">DINNER</span>
-                        <span class="course-price">$89</span>
+                    <div class="menu-course-block">
+                        <div class="course-header">
+                            <span class="course-name">DINNER</span>
+                            <span class="course-price">$89</span>
+                        </div>
+                        <ul class="menu-items">
+                            <li>Sashimi Appetizer</li>
+                            <li><strong>9 Pieces</strong> Premium Nigiri</li>
+                            <li>Signature Handroll</li>
+                            <li>Donburi</li>
+                            <li>Dessert</li>
+                        </ul>
                     </div>
-                    <ul class="menu-items">
-                        <li><strong>Zensai</strong> (Seasonal Starter)</li>
-                        <li>Sashimi Selection</li>
-                        <li><strong>10 Pieces</strong> Premium Nigiri</li>
-                        <li>Signature Handroll</li>
-                        <li>Dessert</li>
-                    </ul>
                 </div>
+
             </div>
+
             <div class="text-center">
                 <a href="#" class="btn-primary" style="background: transparent; color: #000; margin-top: 50px;">VIEW FULL AVAILABILITY</a>
             </div>
