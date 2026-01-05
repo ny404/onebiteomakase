@@ -131,7 +131,8 @@
         }
         .nav-links {
             display: flex;
-            gap: 40px;
+            /* Reduced gap slightly to accommodate new links */
+            gap: 30px; 
         }
         .nav-links a {
             font-family: var(--font-heading);
@@ -309,40 +310,20 @@
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.9; transition: opacity 0.3s; border: 1px solid rgba(255,255,255,0.2); }
         .gallery-item img:hover { opacity: 1; }
 
-        /* --- MENU SECTION (UPDATED: Tatami Style) --- */
+        /* --- MENU SECTION (Tatami Style) --- */
         .menu-section {
             padding: 100px 0;
-            
-            /* Tatami Base Color */
             background-color: #F4EBD9;
-            
-            /* CSS Pattern to simulate woven reed texture */
             background-image: 
-                /* 1. Vertical bindings (thin strings) spaced apart */
                 linear-gradient(90deg, rgba(0,0,0,0.06) 1px, transparent 1px),
-                /* 2. Horizontal reeds (tight repetitive lines) */
-                repeating-linear-gradient(
-                    0deg, 
-                    transparent, 
-                    transparent 2px, 
-                    rgba(139, 90, 43, 0.08) 2px, 
-                    rgba(139, 90, 43, 0.08) 3px
-                );
-            
-            /* Spacing: Vertical lines every 60px */
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(139, 90, 43, 0.08) 2px, rgba(139, 90, 43, 0.08) 3px);
             background-size: 60px 100%, 100% 100%;
-            
             border-top: 1px solid rgba(0,0,0,0.05);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
         .menu-wrapper {
-            background-color: var(--bg-cream);
-            padding: 80px;
-            border: 1px solid rgba(0,0,0,0.05);
-            /* Increased shadow to "lift" menu off the mat */
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08); 
-            max-width: 1400px;
-            margin: 0 auto;
+            background-color: var(--bg-cream); padding: 80px; border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08); max-width: 1400px; margin: 0 auto;
         }
         .menu-grid { display: grid; grid-template-columns: 1fr 1px 1fr; gap: 60px; }
         .menu-divider { width: 1px; height: 100%; background: #DDD; }
@@ -381,6 +362,53 @@
         .review-author { font-family: var(--font-heading); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; }
         .review-stars { color: var(--text-accent); font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 15px; }
 
+        /* --- NEWS/PRESS SECTION --- */
+        .news-section {
+            padding: 100px 0;
+            background-color: #FFF;
+        }
+        .news-list-wrapper {
+            max-width: 900px;
+            margin: 40px auto 0;
+            border-top: 1px solid #EEE;
+        }
+        .news-item {
+            display: flex;
+            align-items: center;
+            padding: 25px 0;
+            border-bottom: 1px solid #EEE;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .news-item:hover {
+            padding-left: 10px; /* Subtle movement on hover */
+            background-color: rgba(252, 248, 237, 0.3); /* Slight cream tint */
+        }
+        .news-date {
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--text-accent);
+            width: 150px; /* Fixed width for alignment */
+            flex-shrink: 0;
+            font-style: italic;
+        }
+        .news-source {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.85rem;
+            width: 300px; /* Increased width */
+            flex-shrink: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+        }
+        .news-headline {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            color: var(--text-black);
+            font-weight: 400;
+        }
+
         /* --- FOOTER --- */
         footer { background-color: #1a1a1a; color: #FCF8ED; padding: 80px 0 40px; position: relative; }
         footer::before {
@@ -416,6 +444,11 @@
             .chef-profile { padding: 50px 20px; }
             .gallery-item { height: 250px; width: 300px; }
             .reviews-grid { grid-template-columns: 1fr; gap: 30px; }
+            
+            /* News List Responsiveness */
+            .news-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .news-date, .news-source { width: auto; font-size: 0.8rem; margin-bottom: 0; }
+            .news-headline { font-size: 1rem; }
         }
         @media (max-width: 600px) {
             .hero h1 { font-size: 1.1rem; letter-spacing: 0.15em; }
@@ -442,6 +475,8 @@
                 <a href="#story">OUR STORY</a>
                 <a href="#chefs">CHEF</a>
                 <a href="#menu">MENU</a>
+                <a href="#reviews">RATINGS</a>
+                <a href="#news">NEWS</a>
                 <a href="#visit">LOCATION</a>
                 <a href="#" style="font-weight: 600;">RESERVE</a>
             </div>
@@ -457,6 +492,8 @@
             <a href="#story" class="mobile-link">OUR STORY</a>
             <a href="#chefs" class="mobile-link">CHEF</a>
             <a href="#menu" class="mobile-link">MENU</a>
+            <a href="#reviews" class="mobile-link">RATINGS</a>
+            <a href="#news" class="mobile-link">NEWS</a>
             <a href="#visit" class="mobile-link">LOCATION</a>
             <a href="#" class="mobile-link" style="font-weight: 600;">RESERVE</a>
         </div>
@@ -603,6 +640,39 @@
         </div>
     </section>
 
+    <section id="news" class="news-section">
+        <div class="container">
+            <h3 class="text-center">MEDIA & NEWS</h3>
+            <div class="news-list-wrapper">
+                
+                <a href="https://www.novacircle.com/spots/north-america/united-states/new-york-state/new-york-city/new-york-ny/one-bite-omakase-5841bb" class="news-item">
+                    <span class="news-date">Nov 2025</span>
+                    <span class="news-source">Nova Circle</span>
+                    <span class="news-headline">"Unique Omakase Dining Experience in New York City"</span>
+                </a>
+
+                <a href="https://eatersdigestnyc8.wordpress.com/2025/08/30/one-bite-omakase/" class="news-item">
+                    <span class="news-date">Aug 2025</span>
+                    <span class="news-source">Eaters Digest</span>
+                    <span class="news-headline">"One Bite Omakase serves some of the highest quality sushi you can find at this price point in the neighborhood"</span>
+                </a>
+
+                <a href="https://exploringtheupperwestside.com/restaurant/one-bite-omakase/" class="news-item">
+                    <span class="news-date">May 2025</span>
+                    <span class="news-source">Exploring The Upper West Side</span>
+                    <span class="news-headline">"Your Guide to One Bite Omakase"</span>
+                </a>
+
+                <a href="https://www.andyhondamd.com/post/a-new-omakase-spot-on-the-uws-one-bite-omakase" class="news-item">
+                    <span class="news-date">May 2024</span>
+                    <span class="news-source">Andy Honda MD</span>
+                    <span class="news-headline">"A New Omakase Spot on the UWS"</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
     <footer id="visit">
         <div class="container footer-flex">
             <div class="footer-col">
@@ -638,7 +708,8 @@
             const revealImages = document.querySelectorAll('.harmony-image img, .chef-photo-side img');
             revealImages.forEach(el => { el.classList.add('reveal'); observer.observe(el); });
 
-            const revealText = document.querySelectorAll('h1, h2, h3, h4, p, .pedigree-list, .menu-items, .btn-primary, .price-text, .review-card, .overall-rating');
+            // Added .news-item to observer list
+            const revealText = document.querySelectorAll('h1, h2, h3, h4, p, .pedigree-list, .menu-items, .btn-primary, .price-text, .review-card, .overall-rating, .news-item');
             revealText.forEach(el => {
                 if (!el.closest('footer') && !el.closest('.hero')) { 
                     el.classList.add('reveal', 'reveal-delay'); observer.observe(el);
