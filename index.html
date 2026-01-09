@@ -207,20 +207,31 @@
 
         /* --- HERO SECTION --- */
         .hero {
+            /* Desktop Default */
             min-height: 95vh; 
             margin-top: 90px;
+            
             background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 30%, rgba(0,0,0,0) 60%), 
                         url('images/hero-banner.png');
             background-size: cover;
             background-position: center 25%;
+            
             display: flex;
             align-items: flex-end;
             justify-content: center;
+            
+            /* Desktop Default */
             padding-bottom: 60px;
+            
             text-align: center;
             color: var(--text-white);
         }
-        .hero-content-wrapper { max-width: 800px; padding: 0 20px; }
+        
+        .hero-content-wrapper {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
         .hero h1 {
             font-family: var(--font-heading);
             font-size: 1.4rem;
@@ -231,6 +242,7 @@
             letter-spacing: 0.25em;
             font-weight: 400;
         }
+        
         .hero .subtitle {
             font-family: var(--font-body);
             font-size: 0.85rem;
@@ -239,6 +251,7 @@
             margin-bottom: 25px;
             letter-spacing: 0.05em;
         }
+        
         .price-text {
             display: block;
             margin-top: 25px;
@@ -325,7 +338,6 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.08); max-width: 1400px; margin: 0 auto;
         }
         
-        /* 2-Column Layout: Left (Stacked Lunches) | Right (Dinner) */
         .menu-grid { 
             display: grid; 
             grid-template-columns: 1fr 1px 1fr; 
@@ -334,9 +346,8 @@
         
         .menu-divider { width: 1px; height: 100%; background: #DDD; }
         
-        /* Individual Course Blocks */
         .menu-course-block {
-            margin-bottom: 60px; /* Spacing between stacked items */
+            margin-bottom: 60px; 
         }
         .menu-course-block:last-child {
             margin-bottom: 0;
@@ -348,7 +359,15 @@
         }
         .course-name { font-family: var(--font-heading); font-size: 1.5rem; }
         .course-price { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 600; }
-        .menu-items li { padding: 8px 0; border-bottom: 1px dashed #E0DCD0; display: flex; justify-content: space-between; }
+        
+        .menu-items li { 
+            padding: 8px 0; 
+            border-bottom: 1px dashed #E0DCD0; 
+            display: flex; 
+            justify-content: flex-start; 
+            gap: 5px;
+            text-align: left; 
+        }
 
         /* --- REVIEWS SECTION --- */
         .reviews-section {
@@ -477,6 +496,12 @@
             .nav-links { display: none; }
             .hamburger { display: block; }
             .footer-flex { flex-direction: column; gap: 40px; text-align: center; }
+            
+            /* HERO UPDATE FOR MOBILE ONLY */
+            .hero {
+                min-height: 100vh;
+                padding-bottom: 30px;
+            }
         }
     </style>
 </head>
@@ -490,8 +515,8 @@
                 <a href="#story">OUR STORY</a>
                 <a href="#chefs">CHEF</a>
                 <a href="#menu">MENU</a>
-                <a href="#reviews">GUEST</a>
-                <a href="#news">NEWS</a>
+                <a href="#reviews">GUEST REVIEWS</a>
+                <a href="#news">PRESS & MEDIA</a>
                 <a href="#visit">LOCATION</a>
                 <a href="#" style="font-weight: 600;">RESERVE</a>
             </div>
@@ -507,8 +532,8 @@
             <a href="#story" class="mobile-link">OUR STORY</a>
             <a href="#chefs" class="mobile-link">CHEF</a>
             <a href="#menu" class="mobile-link">MENU</a>
-            <a href="#reviews" class="mobile-link">GUEST</a>
-            <a href="#news" class="mobile-link">NEWS</a>
+            <a href="#reviews" class="mobile-link">GUEST REVIEWS</a>
+            <a href="#news" class="mobile-link">PRESS & MEDIA</a>
             <a href="#visit" class="mobile-link">LOCATION</a>
             <a href="#" class="mobile-link" style="font-weight: 600;">RESERVE</a>
         </div>
@@ -652,7 +677,7 @@
     <section id="reviews" class="reviews-section">
         <div class="container">
             <div class="reviews-header text-center">
-                <h3>GUEST EXPERIENCES</h3>
+                <h3>GUEST REVIEWS</h3>
                 <div class="overall-rating">
                     <span class="rating-number">4.9</span>
                     <div class="stars">★★★★★</div>
@@ -681,7 +706,7 @@
 
     <section id="news" class="news-section">
         <div class="container">
-            <h3 class="text-center">MEDIA & NEWS</h3>
+            <h3 class="text-center">PRESS & MEDIA</h3>
             <div class="news-list-wrapper">
                 
                 <a href="https://www.novacircle.com/spots/north-america/united-states/new-york-state/new-york-city/new-york-ny/one-bite-omakase-5841bb" class="news-item">
